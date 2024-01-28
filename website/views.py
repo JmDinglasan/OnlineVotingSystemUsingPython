@@ -54,4 +54,19 @@ def vote():
 
     return render_template('vote.html')
 
-    
+@views.route('/profile', methods=['GET', 'POST'])
+@login_required
+def profile():
+    if request.method == 'POST':
+        voter = current_user.studentId
+        post = request.form.get('president')
+        
+        if(post == None):
+            flash('please enter post', category="error")
+        else:
+            profile = models.Profile(post=post)
+            db.session.add(profile)
+            db.session.commit()
+            flash('Posted', category="success")
+
+    return render_template('profile.html')

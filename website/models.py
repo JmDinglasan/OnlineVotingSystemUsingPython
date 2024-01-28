@@ -56,3 +56,9 @@ class Vote(db.Model):
 class BallotStatus(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     isOpen = db.Column(db.Boolean, nullable=False)
+
+class Profile(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    post = db.Column(db.String(10000))
+    image = db.Column(db.LargeBinary)
+    studentId = db.Column(db.String(15), db.ForeignKey('candidate.studentId'), nullable=False)
